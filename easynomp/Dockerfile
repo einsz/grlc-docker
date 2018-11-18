@@ -1,11 +1,15 @@
 FROM debian:stretch
-apt update -y
-apt install -y python make g++ redis-server curl gnupg2 git
-curl -sL https://deb.nodesource.com/setup_8.x | bash -
-apt install -y nodejs
-npm install -g pm2@latest
-pm2 init
+RUN apt update -y
+RUN apt install -y python make g++ redis-server curl gnupg2 git
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt install -y nodejs
+RUN npm install -g pm2@latest
+RUN pm2 init
 
-git clone https://github.com/leshacat/EasyNOMP
-cd EasyNOMP
-npm install
+RUN git clone https://github.com/leshacat/EasyNOMP
+RUN cd EasyNOMP
+RUN npm install
+RUN pm2 init
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
