@@ -1,6 +1,6 @@
 FROM debian:stretch
 RUN apt update -y
-RUN apt install -y python make g++ redis-server curl gnupg2 git
+RUN apt install -y python make g++ redis-server curl gnupg2 git libgmp3-dev
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt install -y nodejs
 RUN npm install -g pm2@latest
