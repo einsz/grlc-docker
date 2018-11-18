@@ -5,7 +5,7 @@ RUN apk --update add git openssh libevent-dev boost-dev autoconf automake libtoo
 WORKDIR /root/Garlicoin
 RUN git clone --depth 1 https://github.com/GarlicoinOrg/Garlicoin.git .
 COPY install-berkeleydb-4.8.sh /root/Garlicoin/
-RUN ./install-berkeleydb-4.8.sh
+RUN chmod +x ./install-berkeleydb-4.8.sh && ./install-berkeleydb-4.8.sh
 RUN ./autogen.sh
 RUN ./configure --without-gui --disable-tests --disable-bench LDFLAGS="-L/root/Garlicoin/db4/lib/" CPPFLAGS="-I/root/Garlicoin/db4/include/"
 RUN make
@@ -24,4 +24,5 @@ RUN mkdir -p /root/bin
 ENV PATH="/root/bin:$PATH"
 COPY --from=build_step /root/Garlicoin/src/garlicoin* /root/bin/
 COPY entrypoint.sh /root/bin
+RUN chmod +x /root/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
