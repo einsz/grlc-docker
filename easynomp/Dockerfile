@@ -10,6 +10,7 @@ RUN git clone https://github.com/leshacat/EasyNOMP
 RUN cd EasyNOMP
 RUN npm install
 RUN pm2 init
-COPY entrypoint.sh /EasyNOMP/
-RUN chmod +x /EasyNOMP/entrypoint.sh
+RUN cd /
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
